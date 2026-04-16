@@ -122,7 +122,7 @@ Result:
 
 ---
 
-## Screenshots
+## screenshots
 
 ![Nmap Scan](screenshots/02-nmap-scan-dc-identification.png)
 ![Security Onion Alerts](screenshots/03-so-alerts-after-nmap-scan.png)
