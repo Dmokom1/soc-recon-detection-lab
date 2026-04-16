@@ -2,22 +2,11 @@
 
 ## Overview
 
-In this phase of my home SOC lab, I simulated reconnaissance from a Kali Linux attacker VM against an internal Active Directory environment and validated that Security Onion could detect the activity. I then pivoted from the generated alerts to identify the attacker source IP, built a custom threshold detection rule in Elastic, and confirmed that the rule fired successfully when the reconnaissance was repeated against the domain controller.
+In this lab, I simulated reconnaissance activity using Nmap against an internal domain controller in my home SOC environment.
 
-This phase focuses on alert triage, attacker identification, and basic detection engineering.
+After running the scan from a Kali Linux machine, I analyzed how Security Onion detected the activity. I reviewed alerts in Elastic, identified the attacker source IP, and examined the related logs to understand how the scan was captured.
 
----
-
-## Objective
-
-The goal of this phase was to:
-
-- Perform internal reconnaissance using Nmap
-- Identify the domain controller from scan results
-- Review alerts generated in Security Onion
-- Pivot to identify the attacker source IP
-- Create a custom detection rule in Elastic
-- Validate detection through repeated attack simulation
+Based on what I observed, I created a custom detection rule in Kibana to catch repeated scan behavior. I then re-ran targeted scans to confirm that the rule triggered consistently.
 
 ---
 
@@ -25,100 +14,57 @@ The goal of this phase was to:
 
 ### Systems
 - Kali Linux (attacker)
-- Windows Server 2022 (Domain Controller)
-- Security Onion 2.4.211
+- Windows Server (Domain Controller)
+- Security Onion (SIEM)
 
-### Network
-- Host-only network: 192.168.30.0/24
-- Management network: 192.168.9.0/24
-
-### Key Hosts
-- Kali: 192.168.30.136
-- Domain Controller: 192.168.30.128
-- Security Onion: 192.168.9.131
-
----
-
-## Tools Used
-
+### Tools Used
 - Nmap
 - Security Onion
+- Kibana (Elastic)
 - Suricata
-- Elastic / Kibana
-- Windows Server 2022
 
 ---
 
 ## Attack Simulation
 
-### 1. Nmap Scan
+A reconnaissance scan was performed from the Kali Linux machine targeting the domain controller using Nmap.
 
-Command used:
-
-nmap -A 192.168.30.128
-
-This revealed:
-- Kerberos (88)
-- LDAP (389)
-- Global Catalog (3268)
-
-Confirmed target as domain controller.
+The goal was to generate detectable network activity and observe how it appeared in Security Onion.
 
 ---
 
-### 2. Alert Detection in Security Onion
+## Detection & Analysis
 
-Observed alerts:
-- ET SCAN Nmap Scripting Engine User-Agent Detected
-- ET SCAN Possible Nmap User-Agent Observed
-- ET SCAN NMAP OS Detection Probe
+After running the scan:
 
----
+- Alerts were generated in Security Onion
+- The attacker source IP was identified
+- Relevant logs were analyzed in Kibana
+- Suricata logs showed clear evidence of scan behavior
 
-### 3. Source Identification
-
-From alert drilldown:
-- source.ip: 192.168.30.136 (Kali)
-- destination.ip: 192.168.30.128 (DC)
+This helped confirm that reconnaissance activity was being properly captured and logged.
 
 ---
 
-## Detection Engineering
+## Rule Creation & Validation
 
-### 4. Kibana Query
+A custom threshold-based detection rule was created in Kibana to detect repeated scan activity.
 
-source.ip:192.168.30.136 AND event.dataset.keyword:suricata.alert
+To validate the rule:
+- Additional targeted scans were performed
+- Alerts were triggered consistently
+- Detection behavior matched expectations
 
----
-
-### 5. Custom Rule
-
-- Name: Kali Suricata Alert
-- Type: Threshold
-- Condition: >= 10 events
-- Severity: High
-- Runs every: 1 minute
-
----
-
-## Validation
-
-Re-ran scan:
-
-nmap -A 192.168.30.128
-
-Result:
-- Custom rule triggered successfully
-- Alert generated in Elastic
+This confirmed that the rule was working as intended.
 
 ---
 
 ## Key Takeaways
 
-- Nmap reconnaissance generates detectable telemetry
-- Source IP identification is critical
-- Alerts can be converted into reusable detections
-- Detection must be validated with real activity
+- Nmap scans generate clear and detectable patterns in network logs
+- Identifying the source IP is critical when investigating alerts
+- Detection rules help turn raw alerts into something actionable
+- Re-testing attacks is important to confirm detections actually work
 
 ---
 
@@ -138,4 +84,6 @@ Result:
 
 ## Conclusion
 
-This phase demonstrates how reconnaissance activity can be detected, investigated, and transformed into a working SIEM detection rule. The lab is now prepared for the next phase involving initial access and credential-based attacks.
+This lab showed how reconnaissance activity can be detected and investigated using Security Onion.
+
+By analyzing alerts and building a custom rule, I moved from simply observing activity to creating a working detection. This sets the foundation for the next phase, which will focus on initial access techniques.
