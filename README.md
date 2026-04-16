@@ -48,15 +48,16 @@ This helped confirm that reconnaissance activity was being properly captured and
 
 ## Rule Creation & Validation
 
-A custom threshold-based detection rule was created in Kibana to detect repeated scan activity.
+A custom threshold-based detection rule was created in Kibana using Suricata alert data.
+
+The rule was based on activity from the identified attacker IP and configured to trigger when a defined number of Suricata alerts were observed within a short time window.
 
 To validate the rule:
-- Additional targeted scans were performed
-- Alerts were triggered consistently
-- Detection behavior matched expectations
+- Additional targeted Nmap scans were performed from the Kali machine
+- The rule triggered consistently based on the alert threshold
+- The alerts matched the expected reconnaissance behavior
 
-This confirmed that the rule was working as intended.
-
+This confirmed that repeated scan activity from the attacker host could be reliably detected.
 ---
 
 ## Key Takeaways

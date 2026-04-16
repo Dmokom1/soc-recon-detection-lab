@@ -1,16 +1,7 @@
-# Personal Build Notes
+## Personal Build Notes
 
-## Observation
-Initial scan generated multiple Suricata alerts as expected.
-
-## Challenge
-Too many alerts made it hard to immediately identify attacker behavior.
-
-## Solution
-Filtered by source IP and dataset in Kibana.
-
-## Detection Strategy
-Created threshold rule to group repeated alert activity.
-
-## Lesson Learned
-Raw alerts are noisy. Value comes from filtering, correlation, and detection logic.
+- Had issues with GitHub not displaying images due to case sensitivity between "Screenshots" and "screenshots"
+- Learned that Git on Windows can ignore case-only folder changes, which caused confusion when fixing paths
+- Initially mixed multiple projects in one repo, which made structure unclear
+- Got more comfortable navigating Elastic and understanding how Suricata logs Nmap scan activity
+- Realized the importance of keeping each project focused on a single objective (removed RDP step since it belongs to a later phase)
