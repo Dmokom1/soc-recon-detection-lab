@@ -124,16 +124,15 @@ Result:
 
 ## Screenshots
 
-![Nmap Scan](screenshots/02-nmap-scan-dc-identification.png)
-![Security Onion Alerts](screenshots/03-so-alerts-after-nmap-scan.png)
-![Alert Drilldown](screenshots/04-so-alert-drilldown-kali-source-ip.png)
-![Kibana Query](screenshots/05-kibana-query-kali-suricata-activity.png)
-![Rule Creation](screenshots/06-kibana-search-threshold-rule-created.png)
-![Rule Metadata](screenshots/06b-kibana-rule-metadata-and-schedule.png)
-![Custom Rule](screenshots/07-kibana-custom-rule-visible.png)
-![Targeted Scan](screenshots/08-targeted-nmap-scan-dc.png)
-![Rule Fired](screenshots/09-custom-rule-fired-history.png)
-![RDP Enabled](screenshots/10-rdp-enabled-on-dc.png)
+![Nmap Scan](Screenshots/02-nmap-scan-dc-identification.png)
+![Security Onion Alerts](Screenshots/03-so-alerts-after-nmap-scan.png)
+![Alert Drilldown](Screenshots/04-so-alert-drilldown-kali-source-ip.png)
+![Kibana Query](Screenshots/05-kibana-query-kali-suricata-activity.png)
+![Rule Creation](Screenshots/06-kibana-search-threshold-rule-created.png)
+![Rule Metadata](Screenshots/06b-kibana-rule-metadata-and-schedule.png)
+![Custom Rule](Screenshots/07-kibana-custom-rule-visible.png)
+![Targeted Scan](Screenshots/08-targeted-nmap-scan-dc.png)
+![Rule Fired](Screenshots/09-custom-rule-fired-history.png)
 
 ---
 
